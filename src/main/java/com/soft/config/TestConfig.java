@@ -19,8 +19,11 @@ public class TestConfig implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		User u1 = new User(null, "Maria Brown", "emailMaria@gmail.com", "956865234", "123456");
+		User u2 = new User(null, "Hardwell", "hardwell@gmail.com", "vai são paulo", "654321");
 		
 		ur.save(u1);
+		
+		ur.save(u2);
 		
 	}
 	
