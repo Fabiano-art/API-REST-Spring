@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.soft.entity.Category;
 import com.soft.entity.Order;
 import com.soft.entity.OrderItem;
+import com.soft.entity.Payment;
 import com.soft.entity.Product;
 import com.soft.entity.User;
 import com.soft.enums.OrderStatus;
@@ -65,6 +66,9 @@ public class TestConfig implements CommandLineRunner{
 		p3.getCategories().add(cat3);
 		p4.getCategories().add(cat3);
 		p2.getCategories().add(cat2);
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-21T19:53:07Z"), o1);
+		o1.setPayment(pay1);
 		
 		ur.save(u1);
 		ur.save(u2);
