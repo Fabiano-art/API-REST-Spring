@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.soft.service.exception.DatabaseException;
 import com.soft.service.exception.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -18,6 +19,14 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
 		String erro = "resource not found";
 		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError error = new StandardError(Instant.now(), status.value(), erro, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(error);
+	}
+	
+	@ExceptionHandler(DatabaseException.class)
+	public ResponseEntity<StandardError> resourceNotFoundToDelete (DatabaseException e, HttpServletRequest request){
+		String erro = "Erro when deleting";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError error = new StandardError(Instant.now(), status.value(), erro, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(error);
 	}
